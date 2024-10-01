@@ -1,0 +1,153 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} 3News {% endblock title %}</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Optional: You can add custom CSS to override Bootstrap styles -->
+    <style>
+        .nav-links a {
+            color: white;
+            padding: 10px;
+        }
+
+        .nav-links a:hover {
+            color: #ffc107;
+            /* Bootstrap warning color */
+        }
+
+        header {
+            background-color: #343a40;
+            /* Dark background */
+            padding: 15px;
+        }
+
+        footer {
+            background-color: #343a40;
+            /* Dark footer */
+            color: white;
+            padding: 20px;
+        }
+
+        .footer-links ul,
+        .footer-social ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .footer-links ul li,
+        .footer-social ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a,
+        .footer-social a {
+            color: white;
+        }
+
+        .footer-links a:hover,
+        .footer-social a:hover {
+            color: #ffc107;
+            /* Bootstrap warning color */
+        }
+    </style>
+</head>
+
+<body>
+    <header class="d-flex justify-content-between align-items-center">
+        {% block header_left %}
+        <div class="header-right">
+            <a href="{% url 'home' %}">
+                <img src="{% static 'images/news-media.png' %}" alt="TV Wofa" class="img-fluid" style="max-height: 50px;">
+            </a>
+        </div>
+        {% endblock header_left %}
+
+        {% block header_center %}
+        <div class="header-center">
+            <nav>
+                <ul class="nav-links list-unstyled d-flex justify-content-center">
+                    <li><a href="{% url 'home' %}" class="text-white">Home</a></li>
+                    <li><a href="#news" class="text-white">News</a></li>
+                    <li><a href="#politics" class="text-white">Politics</a></li>
+                    <li><a href="#election" class="text-white">Election</a></li>
+                    <li><a href="#entertainment" class="text-white">Entertainment</a></li>
+                    <li><a href="#sports" class="text-white">Sports</a></li>
+                    <li><a href="#health" class="text-white">Health</a></li>
+                    <li><a href="#business" class="text-white">Business</a></li>
+                    <li><a href="#live-tv" class="text-white">Live TV/Radio</a></li>
+                </ul>
+            </nav>
+        </div>
+        {% endblock header_center %}
+
+        {% block header_right %}
+        <div class="header-left d-flex">
+            <a href="{% url 'login' %}" class="mr-3">
+                <img src="{% static 'images/login-avatar.png' %}" alt="Login" class="img-fluid" style="max-height: 30px;">
+            </a>
+            <a href="#" class="mr-3">
+                <img src="{% static 'images/search.png' %}" alt="Search" class="img-fluid" style="max-height: 30px;">
+            </a>
+            <a href="#">
+                <img src="{% static 'images/night-mode.png' %}" alt="Switch" class="img-fluid" style="max-height: 30px;">
+            </a>
+        </div>
+        {% endblock header_right %}
+    </header>
+
+    <main class="container mt-4">
+        {% block content %}
+        {% endblock content %}
+    </main>
+
+    <footer class="container-fluid mt-5">
+        <div class="row">
+            <div class="col-md-4 footer-links">
+                <h3>Infocenter</h3>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">About Media General</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Advertise</a></li>
+                </ul>
+            </div>
+
+            <div class="col-md-4 footer-links">
+                <h3>Ghana Politics</h3>
+                <ul>
+                    <li><a href="#">Politics</a></li>
+                    <li><a href="#">Election</a></li>
+                    <li><a href="#">Political Parties</a></li>
+                    <li><a href="#">Presidents</a></li>
+                </ul>
+            </div>
+
+            <div class="col-md-4 footer-social">
+                <h3>Follow Us</h3>
+                <ul class="d-flex">
+                    <li class="mr-3"><a href="#"><img src="{% static 'images/fb.png' %}" alt="Facebook" class="img-fluid"
+                                style="max-height: 30px;"></a></li>
+                    <li class="mr-3"><a href="#"><img src="{% static 'images/X.png' %}" alt="X" class="img-fluid"
+                                style="max-height: 30px;"></a></li>
+                    <li><a href="#"><img src="{% static 'images/youtube.png' %}" alt="YouTube" class="img-fluid"
+                                style="max-height: 30px;"></a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
