@@ -1,3 +1,4 @@
+from typing import Any
 from django.forms import BaseModelForm
 from django.http import HttpResponse
 from django.shortcuts import render
@@ -8,6 +9,7 @@ from django.views.generic import(
     DetailView,
 )
 from .models import News
+from .forms import CommentForm
 
 class HomePageView(TemplateView):
     model = News
@@ -34,6 +36,11 @@ class NewsCreateView(CreateView):
 class NewsDetailView(DetailView):
     model = News
     template_name = 'news_detail.html'
+
+    def get_context_data(self, **kwargs: Any):
+        context = super().get_context_data(**kwargs)
+        context['form'] = CommentForm()
+        return context
     
 class NewsListView(ListView):
     model = News

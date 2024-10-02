@@ -39,3 +39,18 @@ class News(models.Model):
     
     def get_absolute_url(self):
         return reverse('news_detail', kwargs={'pk': self.pk})
+    
+
+class Comment(models.Model):
+    news = models.ForeignKey(News, on_delete=models.CASCADE)
+    comment = models.CharField(max_length=140)
+    profile_name = models.CharField(max_length=20, null=True, blank=True, unique=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self) -> str:
+        return self.comment
+    
+    def get_absolute_url(self):
+        return reverse('news_detail', kwargs={'pk': self.news.pk})
+    
+
