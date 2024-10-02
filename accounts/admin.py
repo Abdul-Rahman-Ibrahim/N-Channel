@@ -21,6 +21,7 @@ class CustomUserAdmin(UserAdmin):
     )
 
     add_fieldsets = UserAdmin.add_fieldsets + (
+        ('Email', {'fields': ('email',)}),
         ('Position', {'fields': ('position',)}),
         ('Age', {'fields': ('age',)}),
     )

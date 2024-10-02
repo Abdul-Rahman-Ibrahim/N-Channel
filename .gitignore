@@ -1,0 +1,67 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# macOS hidden files
+.DS_Store
+
+# Django specific stuff:
+db.sqlite3        # SQLite database file (if you're using SQLite)
+*.sqlite3
+
+# Local environment settings
+.env              # If you're using environment variables in a .env file
+
+# Static files
+/static/
+staticfiles/
+
+# Media files
+/media/
+mediafiles/
+
+# Logs
+*.log
+logs/
+
+# Virtual environment
+venv/
+env/
+ENV/
+*.env
+*.venv
+
+# VS Code workspace settings
+.vscode/
+
+# Coverage reports
+htmlcov/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+
+# Unit test / pytest cache
+.tox/
+.pytest_cache/
+
+# MyPy
+.mypy_cache/
+
+# PyCharm settings
+.idea/
+
+# Node modules (if you use npm/yarn for front-end packages)
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Build directories
+build/
+dist/

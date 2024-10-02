@@ -16,11 +16,6 @@ class HomePageView(TemplateView):
 class AdminPageView(TemplateView):
     template_name = 'admins_home.html'
 
-# class AdminNewsDetailView(DetailView):
-#     model = News
-#     template_name = 'admin_news_detail.html'  # Use a separate template for admin view
-
-
 class NewsCreateView(CreateView):
     model = News
     template_name = 'news_new.html'
