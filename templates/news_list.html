@@ -10,23 +10,25 @@ News
 
     <div class="row">
         {% for news in news_list %}
-        <div class="col-md-4 mb-4">
-            <div class="card h-100">
-                {% if news.image %}
-                <div class="news-image">
-                    <img src="{{ news.image.url }}" class="card-img-top" alt="{{ news.title }}">
-                </div>
-                {% endif %}
-                <div class="card-body">
-                    <h5 class="card-title"><a href="{% url 'news_detail' news.pk %}">{{ news.title }}</a></h5>
-                    <p class="card-text">{{ news.summary }}</p>
-                    <p class="text-muted">By {{ news.author }} | {{ news.created_at|date:"M d, Y" }}</p>
-                </div>
-                <div class="card-footer text-right">
-                    <a href="{% url 'news_detail' news.pk %}" class="btn btn-primary">Read More</a>
+            {% if news.published %}
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    {% if news.image %}
+                    <div class="news-image">
+                        <img src="{{ news.image.url }}" class="card-img-top" alt="{{ news.title }}">
+                    </div>
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title"><a href="{% url 'news_detail' news.pk %}">{{ news.title }}</a></h5>
+                        <p class="card-text">{{ news.summary }}</p>
+                        <p class="text-muted">By {{ news.author }} | {{ news.created_at|date:"M d, Y" }}</p>
+                    </div>
+                    <div class="card-footer text-right">
+                        <a href="{% url 'news_detail' news.pk %}" class="btn btn-primary">Read More</a>
+                    </div>
                 </div>
             </div>
-        </div>
+            {% endif %}
         {% endfor %}
     </div>
 
