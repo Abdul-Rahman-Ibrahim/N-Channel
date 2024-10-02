@@ -1,7 +1,12 @@
 from django.forms import BaseModelForm
 from django.http import HttpResponse
 from django.shortcuts import render
-from django.views.generic import TemplateView, CreateView
+from django.views.generic import(
+    TemplateView,
+    CreateView,
+    ListView,
+    DetailView,
+)
 from .models import News
 
 class HomePageView(TemplateView):
@@ -10,6 +15,11 @@ class HomePageView(TemplateView):
 
 class AdminPageView(TemplateView):
     template_name = 'admins_home.html'
+
+# class AdminNewsDetailView(DetailView):
+#     model = News
+#     template_name = 'admin_news_detail.html'  # Use a separate template for admin view
+
 
 class NewsCreateView(CreateView):
     model = News
@@ -25,3 +35,12 @@ class NewsCreateView(CreateView):
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
+    
+class NewsDetailView(DetailView):
+    model = News
+    template_name = 'news_detail.html'
+    
+class NewsListView(ListView):
+    model = News
+    template_name = 'news_list.html'
+    context_object_name = 'news_list'
