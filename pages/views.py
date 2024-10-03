@@ -1,5 +1,4 @@
 from typing import Any
-from django.forms import BaseModelForm
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.views.generic import(
@@ -7,7 +6,12 @@ from django.views.generic import(
     CreateView,
     ListView,
     DetailView,
+    FormView,
 )
+from django.views import View
+from django.views.generic.detail import SingleObjectMixin
+from django.urls import reverse, reverse_lazy
+
 from .models import News
 from .forms import CommentForm
 
@@ -33,7 +37,7 @@ class NewsCreateView(CreateView):
         form.instance.author = self.request.user
         return super().form_valid(form)
     
-class NewsDetailView(DetailView):
+class CommentGet(DetailView):
     model = News
     template_name = 'news_detail.html'
 
@@ -41,6 +45,35 @@ class NewsDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         context['form'] = CommentForm()
         return context
+
+class CommentPost(SingleObjectMixin, FormView):
+    model = News
+    form_class = CommentForm
+    template_name = 'news_detail.html'
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        return super().post(request, *args, **kwargs)
+    
+    def form_valid(self, form):
+        comment = form.save(commit=False)
+        comment.news = self.object
+        comment.save()
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        news = self.get_object()
+        return reverse('news_detail', kwargs={'pk': news.pk})
+
+class NewsDetailView(View):
+    def get(self, request, *args, **kwargs):
+        view = CommentGet.as_view()
+        return view(request, *args, **kwargs)
+    
+    def post(self, request, *args, **kwargs):
+        view = CommentPost.as_view()
+        return view(request, *args, **kwargs)
+    
     
 class NewsListView(ListView):
     model = News
