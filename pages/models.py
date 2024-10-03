@@ -44,7 +44,7 @@ class News(models.Model):
 class Comment(models.Model):
     news = models.ForeignKey(News, on_delete=models.CASCADE)
     comment = models.CharField(max_length=140)
-    profile_name = models.CharField(max_length=20, null=True, blank=True, unique=True)
+    profile_name = models.CharField(max_length=20, null=True, blank=True, unique=False)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self) -> str:
