@@ -4,9 +4,11 @@ from .views import (HomePageView,
                     NewsCreateView,
                     NewsListView,
                     NewsDetailView,
+                    PoliticsListView
 )
 
 urlpatterns = [
+    path('politics/', PoliticsListView.as_view(), name='politics_list'),
     path('news/', NewsListView.as_view(), name='news_list'),
     path('news/<int:pk>/', NewsDetailView.as_view(), name='news_detail'),
     path('administrator/new', NewsCreateView.as_view(), name='news_new'),

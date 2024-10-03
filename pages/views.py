@@ -28,12 +28,33 @@ class NewsCreateView(CreateView):
         'summary',
         'image',
         'category',
+        'published',
     )
 
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
     
+class NewsDetailView(View):
+    def get(self, request, *args, **kwargs):
+        view = CommentGet.as_view()
+        return view(request, *args, **kwargs)
+    
+    def post(self, request, *args, **kwargs):
+        view = CommentPost.as_view()
+        return view(request, *args, **kwargs)
+    
+class NewsListView(ListView):
+    model = News
+    template_name = 'news_list.html'
+    context_object_name = 'news_list'
+
+class PoliticsListView(ListView):
+    model = News
+    template_name = 'politics_list.html'
+    context_object_name = 'politics_list'
+    
+
 class CommentGet(DetailView):
     model = News
     template_name = 'news_detail.html'
@@ -61,18 +82,3 @@ class CommentPost(SingleObjectMixin, FormView):
     def get_success_url(self):
         news = self.get_object()
         return reverse('news_detail', kwargs={'pk': news.pk})
-
-class NewsDetailView(View):
-    def get(self, request, *args, **kwargs):
-        view = CommentGet.as_view()
-        return view(request, *args, **kwargs)
-    
-    def post(self, request, *args, **kwargs):
-        view = CommentPost.as_view()
-        return view(request, *args, **kwargs)
-    
-    
-class NewsListView(ListView):
-    model = News
-    template_name = 'news_list.html'
-    context_object_name = 'news_list'

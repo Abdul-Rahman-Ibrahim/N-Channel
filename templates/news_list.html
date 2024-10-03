@@ -21,7 +21,7 @@ News
                     <div class="card-body">
                         <h5 class="card-title"><a href="{% url 'news_detail' news.pk %}">{{ news.title }}</a></h5>
                         <p class="card-text">{{ news.summary }}</p>
-                        <p class="text-muted">By {{ news.author }} | {{ news.created_at|date:"M d, Y" }}</p>
+                        <p class="text-muted">By {{ news.author.first_name }} | {{ news.created_at|date:"M d, Y" }}</p>
                     </div>
                     <div class="card-footer text-right">
                         <a href="{% url 'news_detail' news.pk %}" class="btn btn-primary">Read More</a>
