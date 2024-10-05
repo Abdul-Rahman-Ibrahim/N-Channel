@@ -53,6 +53,36 @@ class PoliticsListView(ListView):
     model = News
     template_name = 'politics_list.html'
     context_object_name = 'politics_list'
+
+class ElectionListView(ListView):
+    model = News
+    template_name = 'election_list.html'
+    context_object_name = 'election_list'
+
+class EntertainmentListView(ListView):
+    model = News
+    template_name = 'entertainment_list.html'
+    context_object_name = 'entertainment_list'
+
+class SportsListView(ListView):
+    model = News
+    template_name = 'sports_list.html'
+    context_object_name = 'sports_list'
+
+class HealthListView(ListView):
+    model = News
+    template_name = 'health_list.html'
+    context_object_name = 'health_list'
+
+class BusinessListView(ListView):
+    model = News
+    template_name = 'business_list.html'
+    context_object_name = 'business_list'
+
+class LiveView(ListView):
+    model = News
+    template_name = 'live.html'
+    context_object_name = 'live'
     
 
 class CommentGet(DetailView):

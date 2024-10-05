@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block title %}
+Business
+{% endblock title %}
+
+{% block content %}
+<div class="container my-5">
+    <h1 class="mb-4">Latest News</h1>
+
+    <div class="row">
+        {% for news in business_list %}
+        {% if news.published and news.category == 'BUSINESS' %}
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                {% if news.image %}
+                <div class="news-image">
+                    <img src="{{ news.image.url }}" class="card-img-top" alt="{{ news.title }}">
+                </div>
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title"><a href="{% url 'news_detail' news.pk %}">{{ news.title }}</a></h5>
+                    <p class="card-text">{{ news.summary }}</p>
+                    <p class="text-muted">By {{ news.author.first_name }} | {{ news.created_at|date:"M d, Y" }}</p>
+                </div>
+                <div class="card-footer text-right">
+                    <a href="{% url 'news_detail' news.pk %}" class="btn btn-primary">Read More</a>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+
+    {% if not business_list %}
+    <p class="text-center">No news available at the moment. Please check back later.</p>
+    {% endif %}
+</div>
+{% endblock content %}
+
+{% block extra_css %}
+<style>
+    .news-image {
+        width: 100%;
+        height: 200px;
+        /* Set the desired height */
+        overflow: hidden;
+        /* Hide overflow */
+    }
+
+    .news-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        /* Maintain aspect ratio while covering the area */
+    }
+</style>
+{% endblock extra_css %}
